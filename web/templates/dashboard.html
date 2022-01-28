@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="">
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>StackAPI Dashboard</title>
 </head>
 <body>
-    <h1>StackAPI > Dashboard {{ counts.questions }}</h1>
+    <h1>StackAPI > Dashboard</h1>
     <ul>
         <li>Questions: {{ counts.questions }}</li>
         <li>Articles: {{ counts.articles }}</li>
         <li>Posts: {{ counts.posts }}</li>
     </ul>
+    <h2>Questions</h2>
+    <h4>Topics users have asked about</h4>
+    {{ question_tags }}
+    <h4>Are other users responding</h4>
+    {{ question_answered }}
+    <div>
+        <canvas id="answeredChart" width="400" height="400"></canvas>
+    </div>
+    <h4>Views per Question</h4>
+    {{ question_views }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script>
+        const ctx = document.getElementById('answeredChart').getContext('2d');
+        const myChart2 = new Chart(ctx, {
+            type: 'doughnut',
+            data = {
+            datasets : [{
+                data: [{% for key, value in question_answered.items %} { id: '{{ key }}', nested: { value: {{ value }} } } ,{% endfor %} ],
+                label: 'Answered Questions',
+                backgroundColor: [
+                '#EEEEEE',
+                '#EEEFFF',
+                ],
+                }],  
+            },
+            options : {
+                parsing : {
+                    key: 'nested.value'
+                }
+            },
+        });
+    </script>
 </body>

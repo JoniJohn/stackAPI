@@ -5,11 +5,15 @@ from django.shortcuts import render
 from django.template import loader
 
 import controllers.summary as summary
+import controllers.questions as questions
 
 # Create your views here.
 def dashboard(request):
     template = loader.get_template('dashboard.html')
     context = {
-        "counts": summary.get_counts()
+        "counts": summary.get_counts(),
+        "question_tags": questions.get_tags(),
+        "question_views": questions.view_count_data(),
+        "question_answered": questions.is_answered_data(),
     }
     return HttpResponse(template.render(context, request))
