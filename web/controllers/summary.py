@@ -13,5 +13,3 @@ def get_counts():
         "articles": len(posts_data.get_posts()),
     }
     return totals 
-
-print(get_counts())
