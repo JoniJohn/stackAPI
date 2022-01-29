@@ -10,14 +10,15 @@
     <div class="container">
         <div class="row row-cols-auto">
             <div class="col m-auto">Questions: {{ question_count }}</div>
-            <div class="col m-auto">Articles: 45</div>
-            <div class="col m-auto">Posts: 50</div>
+            <div class="col m-auto">Articles: {{ article_count }}</div>
+            <div class="col m-auto">Posts: {{ post_count }}</div>
         </div>
     </div>
     <h2>Questions</h2>
     <h4>Topics users have asked about</h4>
-  
-    <canvas id="tagsChart" width="400" height="400"></canvas>
+    <div>
+        <canvas id="tagsChart" width="400" height="400"></canvas>
+    </div>
     <h4>Are other users responding</h4>
     
     <div>

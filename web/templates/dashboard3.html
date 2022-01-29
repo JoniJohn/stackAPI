@@ -15,5 +15,30 @@
         </div>
     </div>
     <h2>General activity</h2>
-    <h4>Topics users have asked about</h4>
+    <h4>Post types</h4>
+    <div>
+        <canvas id="typeChart" width="400" height="400"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script>
+        let postTypeCtx =  document.getElementById("typeChart").getContext("2d");
+        let postTypeChart = new Chart(postTypeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    {% for key in post_types.keys %} '{{ key }}', {% endfor %}                  
+                ],
+                datasets: [{
+                    label: 'Post Types',
+                    data: [{% for value in post_types.values %} {{ value }}, {% endfor %}],
+                    backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    ],
+                    hoverOffset: 4
+                }]
+                }
+        });
+    </script>
 </body>
