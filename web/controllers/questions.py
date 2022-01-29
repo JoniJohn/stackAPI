@@ -1,9 +1,9 @@
 import api_services.questions as questions_data
+questions = questions_data.get_questions()
 
 # counts number of tagged languages in questions
 # returns a dictionary of languages and their count
-def get_tags():
-    questions = questions_data.get_questions()
+def get_tags(): 
     tags = {}
     for question in questions:
         # check to see if tag is dictionary 
@@ -17,8 +17,7 @@ def get_tags():
 
 ## is answered
 ## to see how many questions are not answered
-def is_answered_data():
-    questions = questions_data.get_questions()
+def is_answered_data():  
     res = {
         "is_answered": 0,
         "not_answered": 0
@@ -32,7 +31,6 @@ def is_answered_data():
 
 ## view count
 def view_count_data():
-    questions = questions_data.get_questions()
     res = []
     # collect data on view count per question
     for question in questions:
@@ -44,3 +42,6 @@ def view_count_data():
         # append to list
         res.append(summ)
     return res
+
+def get_count():
+    return len(questions)
