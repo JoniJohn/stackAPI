@@ -6,22 +6,31 @@
     <title>StackAPI</title>
 </head>
 <body class="container-fluid">
-    <h6>StackAPI > Dashboard</h6>
+    <h6>StackAPI > Questions Dashboard</h6>
     <div class="container">
-        <div class="row row-cols-auto">
-            <div class="col m-auto">Questions: {{ question_count }}</div>
-            <div class="col m-auto">Articles: 45</div>
-            <div class="col m-auto">Posts: 50</div>
+        <div class="row row-cols-auto fw-bolder">
+            <div class="col m-auto">
+                <div class="d-flex justify-content-center">{{ question_count }}</div>
+                <div class="text-muted">Questions</div>
+            </div>
+            <div class="col m-auto">
+                <div class="d-flex justify-content-center">{{ article_count  }}</div>
+                <div class="text-muted">Articles</div>
+            </div>
+            <div class="col m-auto">
+                <div class="d-flex justify-content-center">{{ post_count  }}</div>
+                <div class="text-muted">Posts</div>
+            </div>
         </div>
     </div>
-    <h2>Questions</h2>
     <h4>Topics users have asked about</h4>
-  
-    <canvas id="tagsChart" width="400" height="400"></canvas>
+    <div>
+        <canvas id="tagsChart"></canvas>
+    </div>
     <h4>Are other users responding</h4>
     
     <div>
-        <canvas id="answeredChart" width="400" height="400"></canvas>
+        <canvas id="answeredChart" width="100" height="100"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
     <script>
