@@ -4,9 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 
-# import controllers.summary as summary
-import controllers.questions as questions
-import controllers.articles as articles
+from controllers import questions, articles, posts
 
 # Questions dashboard
 def dashboard(request):
@@ -22,6 +20,15 @@ def dashboard(request):
 def dashboard2(request):
     template = loader.get_template('dashboard2.html')
     context = {
-        "articles_count": articles.get_count()
+        "articles_count": articles.get_count(),
+        "article_tags": articles.get_tags()
+    }
+    return HttpResponse(template.render(context, request))
+
+# Posts dashboard
+def dashboard3(request):
+    template = loader.get_template('dashboard3.html')
+    context = {
+        "post_activity": posts.get_count(),
     }
     return HttpResponse(template.render(context, request))

@@ -16,6 +16,35 @@
     </div>
     <h2>Articles</h2>
     <h4>Topics users have written articles about</h4>
+    <div>
+        <canvas id="tagsChart" width="400" height="400"></canvas>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script>
+        let tagsCtx = document.getElementById("tagsChart").getContext("2d");
+
+        let chart2 = new Chart(tagsCtx, {
+        type: "bar",
+        data: {
+            labels: [{% for tag in article_tags.keys %} '{{ tag }}', {% endfor %}],
+            datasets: [
+                {
+                label: "Tags Count",
+                backgroundColor: "#79AEC8",
+                borderColor: "#417690",
+                data: [{% for value in article_tags.values %} {{ value }}, {% endfor %}]
+                }
+            ]
+        },
+        options: {
+            title: {
+                text: "Topics users write about",
+                display: true
+            },
+            indexAxis: 'y',
+            responsive: true
+        },
+        });
+    </script>
 </body>
