@@ -22,7 +22,9 @@ def dashboard(request):
 def dashboard2(request):
     template = loader.get_template('dashboard2.html')
     context = {
-        "articles_count": articles.get_count(),
+        "question_count": questions.get_count(),
+        "article_count": articles.get_count(),
+        "post_count": posts.get_count(),
         "article_tags": articles.get_tags()
     }
     return HttpResponse(template.render(context, request))
@@ -31,6 +33,8 @@ def dashboard2(request):
 def dashboard3(request):
     template = loader.get_template('dashboard3.html')
     context = {
+        "question_count": questions.get_count(),
+        "article_count": articles.get_count(),
         "post_count": posts.get_count(),
         "post_types": posts.get_post_types(),
     }
