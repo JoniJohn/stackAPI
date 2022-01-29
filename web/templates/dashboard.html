@@ -16,16 +16,57 @@
     </div>
     <h2>Questions</h2>
     <h4>Topics users have asked about</h4>
-    {{ question_tags }}
+  
     <canvas id="tagsChart" width="400" height="400"></canvas>
     <h4>Are other users responding</h4>
-    {{ question_answered }}
+    
     <div>
         <canvas id="answeredChart" width="400" height="400"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
     <script>
-        
+        let isAnsweredCtx =  document.getElementById("answeredChart").getContext("2d");
+        let chart = new Chart(isAnsweredCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    {% for key in question_answered.keys %} '{{ key }}', {% endfor %}                  
+                ],
+                datasets: [{
+                    label: 'Questions Responses',
+                    data: [{% for value in question_answered.values %} {{ value }}, {% endfor %}],
+                    backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    ],
+                    hoverOffset: 4
+                }]
+                }
+        });
+    </script>
+    <script>
+        let tagsCtx = document.getElementById("tagsChart").getContext("2d");
+
+        let chart2 = new Chart(tagsCtx, {
+        type: "bar",
+        data: {
+            labels: [{% for tag in question_tags.keys %} '{{ tag }}', {% endfor %}],
+            datasets: [
+                {
+                label: "Tags Count",
+                backgroundColor: "#79AEC8",
+                borderColor: "#417690",
+                data: [{% for value in question_tags.values %} {{ value }}, {% endfor %}]
+                }
+            ]
+        },
+        options: {
+            title: {
+                text: "Topics users ask about",
+                display: true
+            }
+        },
+        });
     </script>
     
 </body>

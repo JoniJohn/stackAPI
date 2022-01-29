@@ -19,14 +19,14 @@ def get_tags():
 ## to see how many questions are not answered
 def is_answered_data():  
     res = {
-        "is_answered": 0,
-        "not_answered": 0
+        "Answered": 0,
+        "Unanswered": 0
     }
     for question in questions:
         if question['is_answered']:
-            res['is_answered'] += 1
+            res['Answered'] += 1
         else:
-            res['not_answered'] += 1
+            res['Unanswered'] += 1
     return res
 
 ## view count
